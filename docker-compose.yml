@@ -1,0 +1,11 @@
+version: '2.0'
+
+services:
+  webapp:
+    image: account:latest
+    restart: always
+    container_name: account_cf
+    ports:
+     - 8082:8080
+    volumes:
+     - ./conf/application.properties /usr/local/tomcat/webapps/account/WEB-INF/classes/application.properties
