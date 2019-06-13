@@ -27,10 +27,14 @@ node {
     		        	app.push("latest")
         			}
 		} 
-		stage('Deploy on aws'){
+/*		stage('Deploy on aws'){
 		sh "docker-compose down"
 		sh "docker-compose pull && docker-compose up -d"
-		} 
+		} */
+		stage('Deploy on K8s'){
+
+    		 	sh "ansible-playbook ansible/app-deploy/deploy.yml  --user=jenkins --extra-vars ImageName=${ImageName} --extra-vars imageTag=${imageTag} --extra-vars Namespace=${Namespace}"
+    		}
 		stage('Test URL') {
             		
                 		sleep(time:20,unit:"SECONDS")
